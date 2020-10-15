@@ -1,41 +1,71 @@
+// class and variables
 class Circle {
   float x;
   float y;
   float xSpeed;
   float ySpeed;
-  int radius;
-  color circleColor;
+  float radius;
+  float rectWH;
   
-//  circle = new Circle(random(width), random(height), random(-3, 3), random(-3, 3), 50);
-  Circle(float x, float y, float xSpeed, float ySpeed, int radiusCircle, color circleColor) {
+  color Color;
+
+// circle constructor
+  Circle(float x, float y, float xSpeed, float ySpeed, float radius, color Color) {
     this.x = x;
     this.y = y;
     this.xSpeed = xSpeed;
     this.ySpeed = ySpeed;
-    radius = radiusCircle;
+    this.radius = radius;
+    this.Color = Color;
+    
   }
   
-    Circle(float x, float y, float xSpeed, float ySpeed,  color circleColor) {
+  // rect constructor
+  Circle(color Color,float x, float y, float xSpeed, float ySpeed, float rectWH) {
+    this.Color = Color;
     this.x = x;
     this.y = y;
     this.xSpeed = xSpeed;
     this.ySpeed = ySpeed;
-    this.radius = 20;
+    this.rectWH = rectWH;
+    
   }
-  void move() {
+  
+  // move circle, radius/2 to make sure that the circle doesn't leave the screen
+  void moveCircle() {
     x += xSpeed;
-    if (x < 0 || x > width) {
+    if (x <= radius/2 || x >= width-radius/2) {
       xSpeed *= -1;
     }
 
     y += ySpeed;
-    if (y < 0 || y > height) {
+    if (y <= radius/2 || y >= height-radius/2) {
       ySpeed *= -1;
     }
   }
   
-  void display(){
-   fill(circleColor);
-   ellipse(x, y, radius, radius); 
+  // move rect, rectWH/2 - same as above
+  void moveRect() {
+    x += xSpeed;
+    if (x <= rectWH/2 || x >= width-rectWH/2) {
+      xSpeed *= -1;
+    }
+
+    y += ySpeed;
+    if (y <= rectWH/2 || y >= height-rectWH/2) {
+      ySpeed *= -1;
+    }
   }
+  
+  // Display
+  void displayCircle(){
+    fill(Color);
+    ellipse(x, y, radius, radius); 
+  }
+  // Display
+   void displayRect(){
+     rectMode(CENTER);
+     fill(Color);
+     rect(x, y, rectWH, rectWH);
+}
 }
